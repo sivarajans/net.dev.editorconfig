@@ -1,0 +1,37 @@
+variables:
+  buildConfiguration: Release
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+
+  - task: gitversion/setup@0
+    displayName: Setup GitVersion
+    inputs:
+      versionSpec: '5.x'
+      
+  - task: gitversion/execute@0
+    displayName: Calculate Version
+    inputs:
+      useConfigFile: true
+      configFilePath: './GitVersion.yml'
+  
+  - task: DotNetCoreCLI@2
+    displayName: Pack Editor Config
+    inputs:
+      command: pack
+      configuration: '$(buildConfiguration)'
+      nobuild: false
+      versioningScheme: byEnvVar
+      versionEnvVar: GitVersion.SemVer
+  
+  - task: DotNetCoreCLI@2
+    displayName: Publish Package
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      #Specify Feed to Use for publish TODO
