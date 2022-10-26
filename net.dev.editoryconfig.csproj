@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>sivarajan s</Authors>
+    <Product>net.dev.editorconfig</Product>
+    <Description>.net editor config for developers</Description>
+    <IsPackable>true</IsPackable>
+    <NoDefaultExcludes>true</NoDefaultExcludes>
+    <LangVersion>latest</LangVersion>
+    <AssemblyVersion>1.2.3.4</AssemblyVersion>
+    <FileVersion>1.2.3.4</FileVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="net.dev.editorconfig.props" Pack="true" PackagePath="build\" />
+    <None Include=".editorconfig" Pack="true" PackagePath="rules" />
+  </ItemGroup>
+</Project>
